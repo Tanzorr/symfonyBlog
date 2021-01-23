@@ -12,7 +12,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Form\UserType;
 
 
-
 class UserController extends AbstractController
 {
     /**
@@ -24,6 +23,7 @@ class UserController extends AbstractController
             'controller_name' => 'SecurityController',
         ]);
     }
+
     /**
      * @Route("/register",  name="register")
      */
@@ -31,26 +31,28 @@ class UserController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid() )
-        {
+
+        if ($form->isSubmitted() && $form->isValid() ) {
+            if (!$form->isValid()) {
+                header('Content-Type: cli');
+                dump((string) $form->getErrors(true, false));die;
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $user->setName($request->request->get('user')['name']);
-            $user->setLastName($request->request->get('user')['last_name']);
             $user->setEmail($request->request->get('user')['email']);
             $password = $password_encoder->encodePassword($user, $request->request->get('user')['password']['first']);
             $user->setPassword($password);
-            $user->setRoles(['ROLE_USER']);
-
+            $user->setRoles('[ROLE_USER]');
             $entityManager->persist($user);
             $entityManager->flush();
-
             $this->loginUserAutomatically($user, $password);
-
             return $this->redirectToRoute('admin_main_page');
         }
-        return $this->render('front/register.html.twig',[
-            'form'=>$form->createView()
+        return $this->render('front/register.html.twig', [
+            'form' => $form->createView(),
+            'error' => $form->getErrors()
         ]);
     }
 
@@ -81,7 +83,7 @@ class UserController extends AbstractController
      * @Route("/logout", name="logout")
      */
 
-    public function logout():void
+    public function logout(): void
     {
         throw new \Exception('This should never be reached!');
     }
