@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 text-right mt-5">
+                <h2 class="text-center">Register</h2>
+                {{ form_start(form, {'attr': {'novalidate:':'novalidate', 'class':'needs-validation'}}) }}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+{#                        <input type="email" name="_name" class="form-control" id="name" placeholder="Enter email" name="name">#}
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+{#                        <input type="email" name="_email" class="form-control" id="email" placeholder="Enter email" name="email">#}
+                        {{ form_widget(form.email) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+{#                        <input type="password" name="_password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">#}
+                        {{ form_widget(form.password.first) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password2:</label>
+{#                        <input type="password" name="_password2" class="form-control" id="pwd" placeholder="Enter password" name="pswd">#}
+                        {{ form_widget(form.password.second) }}
+                    </div>
+{#                    <div class="form-group">#}
+{#                        <label for="pwd">Password2:</label>#}
+{#                        <input type="hidden" value="['ROLE_USER']" class="form-control" id="roles" placeholder="Enter password" name="roles">#}
+
+{#                    </div>#}
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="_remember_me" type="checkbox" name="remember"> Remember me
+                        </label>
+                    </div>
+                   <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                   <button type="submit"class="btn btn-primary btn-lg btn-block" >Register</button>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customjavascript %}
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('click', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+        var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords Don't Match");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
+{% endblock %}
+
