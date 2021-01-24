@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+            <article class="mt-5">
+                <h4>{{post.title}}</h4>
+                <p>
+                    {{ post.text }}
+                </p>
+
+            </article>
+
+
+    </div>
+{% endblock %}
