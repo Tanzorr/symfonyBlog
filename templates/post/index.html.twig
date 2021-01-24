@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for post in posts %}
+        <article class="mt-5">
+            <h4>{{post.title}}</h4>
+            <p>
+               {{ post.description }}
+            </p>
+            <p><a class="btn btn-primary" href="{{ path('post',{'id':post.id}) }}">read more</a></p>
+        </article>
+        {% endfor %}
+
+    </div>
+{% endblock %}
