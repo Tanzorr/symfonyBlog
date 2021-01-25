@@ -1,7 +1,13 @@
-/*
-Hello
- */
-
-.add_post-form #post_text {
-    height: 400px;
+body {
+    background-color: lightgoldenrodyellow;
 }
+
+#post_text{
+    height: 350px;
+}
+
+
+
+
+
+
