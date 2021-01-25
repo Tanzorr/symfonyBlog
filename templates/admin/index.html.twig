@@ -15,13 +15,13 @@
                 <h1>Dashboard</h1>
                 <hr/>
                 <div class="row mt-3 mb-3 ml-1">
-                    <a class="btn btn-success" href="">add Post</a>
+                    <a class="btn btn-success" href="{{ path('addPost') }}">add Post</a>
                 </div>
                 <table class="table w-100 table-striped border">
                     {% for post in posts %}
                         <tr>
                             <td><b>{{ post.title }}</b></td>
-                            <td><a href="" class="btn btn-primary">View</a></td>
+                            <td><a href="{{ path('post',{'id':post.id}) }}" class="btn btn-primary">View</a></td>
                             <td><a href="" class="btn btn-success">Edit</a></td>
                             <td><a href="" class="btn btn-danger">Delete</a></td>
                         </tr>
