@@ -39,21 +39,6 @@ class PostController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/posts/{id}", name="post")
-     */
-
-    public function editPost($post)
-    {
-        $author = $this->getUser();
-       return $this->render('edit_post',[
-           'post'=>$post,
-           'author'=>$author
-       ]);
-
-
-    }
-
 
     /**
      * @Route("/post/add", name="addPost")
@@ -62,6 +47,29 @@ class PostController extends AbstractController
     public function addPost(Request $request)
     {
         $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $author = $this->getUser();
+            $entityManager = $this->getDoctrine()->getManager();
+            $post->setCreatedData(new \DateTime());
+            $post->setCreatedBy($author);
+            $entityManager->persist($post);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_main_page');
+        }
+        return $this->render('post/add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/post/edit/{id}", name="edit_post")
+     */
+
+    public function editPost(Request $request, Post $post)
+    {
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
