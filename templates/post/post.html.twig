@@ -11,5 +11,18 @@
                 </p>
 
             </article>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="POST" action="{{path('add_comment',{'postId':post.id})}}">
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Add a comment</label>
+                        <textarea name="comment" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+
+                </form>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

@@ -75,11 +75,8 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $author = $this->getUser();
             $entityManager = $this->getDoctrine()->getManager();
-            $post->setTitle($request->request->get('post')['title']);
-            $post->setDescription($request->request->get('post')['description']);
-            $post->setText($request->request->get('post')['text']);
-            $post->setCreatedData(new \DateTime());
-            $post->setCreatedBy($author);
+            $post->setUpdatedData(new \DateTime());
+            $post->setUpdatedBy($author);
             $entityManager->persist($post);
             $entityManager->flush();
             return $this->redirectToRoute('admin_main_page');

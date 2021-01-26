@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <article class="mt-5">
+            <p>
+                {{ comment.content }}
+            </p>
+            <p><a href="{{path('upruwe_comment',{'id':comment.id}) }}" class="btn btn-success">Upruv</a> <a href="{{path('delete_comment',{'id':comment.id}) }}" class="btn btn-danger">Delet</a></p>
+        </article>
+
+
+    </div>
+{% endblock %}

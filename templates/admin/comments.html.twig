@@ -15,15 +15,16 @@
                 <h1>Dashboard</h1>
                 <hr/>
                 <div class="row mt-3 mb-3 ml-1">
-                    <a class="btn btn-success" href="{{ path('addPost') }}">add Post</a>
+                    <h2>Comments</h2>
                 </div>
                 <table class="table w-100 table-striped border">
-                    {% for post in posts %}
+                    {% for comment in comments %}
                         <tr>
-                            <td><b>{{ post.title }}</b></td>
-                            <td><a href="{{ path('post',{'id':post.id}) }}" class="btn btn-primary">View</a></td>
-                            <td><a href="{{ path('edit_post',{'id':post.id}) }}" class="btn btn-success">Edit</a></td>
-                            <td><a href="{{ path('delete_post',{'id':post.id}) }}" class="btn btn-danger">Delete</a></td>
+                            <td><b>{{ comment.id }}</b></td>
+                            <td><b>{{ comment.content | slice(0, 15) }}</b></td>
+                            <td><a href="{{path('view_comment',{'id':comment.id}) }}" class="btn btn-primary">View</a></td>
+                            <td><a href="{{path('upruwe_comment',{'id':comment.id}) }}" class="btn btn-success">Upruve</a></td>
+                            <td><a href="{{path('delete_comment',{'id':comment.id}) }}" class="btn btn-danger">Delete</a></td>
                         </tr>
                     {% endfor %}
                 </table>
