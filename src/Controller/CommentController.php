@@ -29,14 +29,13 @@ class CommentController extends AbstractController
 
     public function addComment(Post $postId, Request $request)
     {
-       $user =  $this->getUser();
-       if (!empty(trim($request->request->get('comment'))))
-        {
+        $user = $this->getUser();
+        if (!empty(trim($request->request->get('comment')))) {
             $comment = new Comment();
             $comment->setContent($request->request->get('comment'));
-            if($user) {
+            if ($user) {
                 $comment->setRelation($user);
-            }else{
+            } else {
                 $comment->setRelation(null);
             }
             $comment->setUpruwed(null);
@@ -46,7 +45,7 @@ class CommentController extends AbstractController
             $em->persist($comment);
             $em->flush();
         }
-       return $this->redirectToRoute('post',['id'=>$postId->getId()]);
+        return $this->redirectToRoute('post', ['id' => $postId->getId()]);
     }
 
     /**
@@ -56,8 +55,8 @@ class CommentController extends AbstractController
     public function getComment($id)
     {
         $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id);
-        return $this->render('comment/comment.html.twig',[
-            'comment'=>$comment
+        return $this->render('comment/comment.html.twig', [
+            'comment' => $comment
         ]);
     }
 

@@ -12,7 +12,7 @@
                 {% if(comment.upruwed) %}
                     <a href="{{path('hide_comment',{'id':comment.id}) }}" class="btn btn-success">Hide</a>
                 {% else %}
-                    <a href="{{ path('upruwe_comment',{'id':comment.id}) }}" class="btn btn-success">Approve</a>
+                    <a href="{{ path('approve_comment',{'id':comment.id}) }}" class="btn btn-success">Approve</a>
                 {% endif %}
                 <a href="{{ path('delete_comment',{'id':comment.id}) }}" class="btn btn-danger">Delete</a>
             </p>

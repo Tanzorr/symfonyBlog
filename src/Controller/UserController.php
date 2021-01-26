@@ -34,10 +34,11 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() ) {
+        if ($form->isSubmitted() && $form->isValid()) {
             if (!$form->isValid()) {
                 header('Content-Type: cli');
-                dump((string) $form->getErrors(true, false));die;
+                dump((string)$form->getErrors(true, false));
+                die;
             }
             $entityManager = $this->getDoctrine()->getManager();
             $user->setName($request->request->get('user')['name']);
@@ -87,6 +88,4 @@ class UserController extends AbstractController
     {
         throw new \Exception('This should never be reached!');
     }
-
-
 }
