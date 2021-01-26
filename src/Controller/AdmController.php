@@ -17,9 +17,9 @@ class AdmController extends AbstractController
         $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
         $res = $this->denyAccessUnlessGranted('ROLE_USER');
 
-         if($res){
-             $this->redirectToRoute('main_page');
-         }
+        if ($res) {
+            $this->redirectToRoute('main_page');
+        }
         return $this->render('admin/index.html.twig', [
             'posts' => $posts
 

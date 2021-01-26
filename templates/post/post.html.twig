@@ -10,14 +10,15 @@
                 <p>
                     {{ post.text }}
                 </p>
-                <p class="row justify-content-between"><sopan>{{ data }}</sopan><span>{{ author.name }}</span></p>
+                <p class="justify-content-between"><span
+                            class="mr-5">data:{{ data }}</span><span>author:{{ author.name }}</span></p>
             </article>
         </div>
         <div class="comments">
             {% for comment in comments %}
-                <div class="row mt-5">
+                <div class="row mt-2">
                     {% if(comment.upruwed) %}
-                     {{ comment.content }}
+                        {{ comment.content }}
                     {% endif %}
                 </div>
             {% endfor %}
@@ -27,7 +28,7 @@
                 <div class="form-group w-100">
                     <label for="exampleFormControlTextarea1">Add a comment</label>
                     <textarea name="comment" required class="form-control w-100" id="exampleFormControlTextarea1"
-                                  rows="3"></textarea>
+                              rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>

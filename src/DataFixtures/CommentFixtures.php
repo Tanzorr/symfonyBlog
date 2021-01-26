@@ -23,7 +23,6 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             $comment->setPost($_post);
             $comment->setCreatedAt(new \DateTime($created_at));
             $manager->persist($comment);
-
         }
 
         $manager->flush();
@@ -32,10 +31,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
     private function CommentData()
     {
         return [
-
             ['Comment 1 Cras sit amet  Donec lacinia congue felis in faucibus.', 57, 57,'2018-10-08 12:34:45'],
-
-
         ];
     }
 
