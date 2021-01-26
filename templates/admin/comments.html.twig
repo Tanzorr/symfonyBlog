@@ -23,7 +23,11 @@
                             <td><b>{{ comment.id }}</b></td>
                             <td><b>{{ comment.content | slice(0, 15) }}</b></td>
                             <td><a href="{{path('view_comment',{'id':comment.id}) }}" class="btn btn-primary">View</a></td>
-                            <td><a href="{{path('upruwe_comment',{'id':comment.id}) }}" class="btn btn-success">Upruve</a></td>
+                            {% if(comment.upruwed) %}
+                               <td><a href="{{path('hide_comment',{'id':comment.id}) }}" class="btn btn-success">Hide</a></td>
+                          {% else %}
+                                <td><a href="{{path('approve_comment',{'id':comment.id}) }}" class="btn btn-success">Approve</a></td>
+                            {% endif%}
                             <td><a href="{{path('delete_comment',{'id':comment.id}) }}" class="btn btn-danger">Delete</a></td>
                         </tr>
                     {% endfor %}

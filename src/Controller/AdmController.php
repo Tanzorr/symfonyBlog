@@ -15,8 +15,14 @@ class AdmController extends AbstractController
     public function index(): Response
     {
         $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
+        $res = $this->denyAccessUnlessGranted('ROLE_USER');
+
+         if($res){
+             $this->redirectToRoute('main_page');
+         }
         return $this->render('admin/index.html.twig', [
             'posts' => $posts
+
         ]);
     }
 }

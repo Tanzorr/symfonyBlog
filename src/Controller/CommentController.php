@@ -62,10 +62,10 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route ("comment/upuwe/{id}",  name="upruwe_comment")
+     * @Route ("comment/approve/{id}",  name="approve_comment")
      */
 
-    public function upruwComement(Comment $comment)
+    public function approveComement(Comment $comment)
     {
         $em = $this->getDoctrine()->getManager();
         $comment->setUpruwed(true);
@@ -73,6 +73,20 @@ class CommentController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('comments');
     }
+
+    /**
+     * @Route ("comment/hide/{id}",  name="hide_comment")
+     */
+
+    public function hideComement(Comment $comment)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $comment->setUpruwed(false);
+        $em->persist($comment);
+        $em->flush();
+        return $this->redirectToRoute('comments');
+    }
+
 
     /**
      * @Route ("comment/delete/{id}",  name="delete_comment")

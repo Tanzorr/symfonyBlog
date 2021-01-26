@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Entity\User;
 
 
@@ -31,11 +32,22 @@ class PostController extends AbstractController
     public function post($id)
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
-        $author =  $post->getCreatedBy();
+        $author = $post->getCreatedBy();
+        $comments = $this->getDoctrine()->getRepository(Comment::class
+        )->findBy(array('post' => $id));
+        $dataCreate = $post->getCreatedData();
+        $dataUpdate = $post->getUpdatedData();
 
+        if ($dataUpdate) {
+            $data = $dataUpdate->format('Y-m-d H:i:s');
+        } else {
+            $data = $dataCreate->format('Y-m-d H:i:s');
+        }
         return $this->render('post/post.html.twig', [
-            'author'=>$author,
-            'post' => $post
+            'author' => $author,
+            'post' => $post,
+            'comments' => $comments,
+            'data' => $data
         ]);
     }
 
@@ -69,7 +81,6 @@ class PostController extends AbstractController
 
     public function editPost(Request $request, Post $post)
     {
-
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

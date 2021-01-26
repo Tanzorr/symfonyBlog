@@ -8,9 +8,14 @@
             <p>
                 {{ comment.content }}
             </p>
-            <p><a href="{{path('upruwe_comment',{'id':comment.id}) }}" class="btn btn-success">Upruv</a> <a href="{{path('delete_comment',{'id':comment.id}) }}" class="btn btn-danger">Delet</a></p>
+            <p>
+                {% if(comment.upruwed) %}
+                    <a href="{{path('hide_comment',{'id':comment.id}) }}" class="btn btn-success">Hide</a>
+                {% else %}
+                    <a href="{{ path('upruwe_comment',{'id':comment.id}) }}" class="btn btn-success">Approve</a>
+                {% endif %}
+                <a href="{{ path('delete_comment',{'id':comment.id}) }}" class="btn btn-danger">Delete</a>
+            </p>
         </article>
-
-
     </div>
 {% endblock %}

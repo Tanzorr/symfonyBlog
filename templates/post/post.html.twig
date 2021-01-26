@@ -4,25 +4,33 @@
 
 {% block body %}
     <div class="container">
-        <article class="mt-5">
-                <h4>{{post.title}}</h4>
+        <div class="row">
+            <article class="mt-5">
+                <h4>{{ post.title }}</h4>
                 <p>
                     {{ post.text }}
                 </p>
-
+                <p class="row justify-content-between"><sopan>{{ data }}</sopan><span>{{ author.name }}</span></p>
             </article>
-        <div class="row">
-            <div class="col-md-12">
-                <form method="POST" action="{{path('add_comment',{'postId':post.id})}}">
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Add a comment</label>
-                        <textarea name="comment" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
-
-                </form>
-            </div>
         </div>
-
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="row mt-5">
+                    {% if(comment.upruwed) %}
+                     {{ comment.content }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <form class="w-100" method="POST" action="{{ path('add_comment',{'postId':post.id}) }}">
+                <div class="form-group w-100">
+                    <label for="exampleFormControlTextarea1">Add a comment</label>
+                    <textarea name="comment" required class="form-control w-100" id="exampleFormControlTextarea1"
+                                  rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
     </div>
 {% endblock %}
