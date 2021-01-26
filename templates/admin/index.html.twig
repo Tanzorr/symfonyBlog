@@ -7,15 +7,27 @@
         <div class="row">
             <div class="col-lg-2 h-100">
                 <ul>
-                    <li><a class="btn btn-success" href="">add Post</a></li>
-                    <li><a href="">Post</a></li>
-                    <li><a href="">Comments</a></li>
-
+                    <li><a href="{{path('admin_main_page') }}">Post</a></li>
+                    <li><a href="{{path('comments')}}">Comments</a></li>
                 </ul>
             </div>
             <div class="col-lg-10 ">
-                    <h1>Dashboard</h1>
+                <h1>Dashboard</h1>
                 <hr/>
+                <div class="row mt-3 mb-3 ml-1">
+                    <a class="btn btn-success" href="{{ path('addPost') }}">add Post</a>
+                </div>
+                <table class="table w-100 table-striped border">
+                    {% for post in posts %}
+                        <tr>
+                            <td><b>{{ post.title }}</b></td>
+                            <td><a href="{{ path('post',{'id':post.id}) }}" class="btn btn-primary">View</a></td>
+                            <td><a href="{{ path('edit_post',{'id':post.id}) }}" class="btn btn-success">Edit</a></td>
+                            <td><a href="{{ path('delete_post',{'id':post.id}) }}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
             </div>
         </div>
     </div>

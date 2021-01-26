@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <article class="mt-5">
+            <p>
+                {{ comment.content }}
+            </p>
+            <p>
+                {% if(comment.upruwed) %}
+                    <a href="{{path('hide_comment',{'id':comment.id}) }}" class="btn btn-success">Hide</a>
+                {% else %}
+                    <a href="{{ path('upruwe_comment',{'id':comment.id}) }}" class="btn btn-success">Approve</a>
+                {% endif %}
+                <a href="{{ path('delete_comment',{'id':comment.id}) }}" class="btn btn-danger">Delete</a>
+            </p>
+        </article>
+    </div>
+{% endblock %}

@@ -88,12 +88,5 @@ class UserController extends AbstractController
         throw new \Exception('This should never be reached!');
     }
 
-    /**
-     * @Route ("/dashboard", name="admin_main_page")
-     */
 
-    public function admin()
-    {
-        return $this->render('admin/index.html.twig');
-    }
 }

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 h-100">
+                <ul>
+                    <li><a href="{{path('admin_main_page') }}">Post</a></li>
+                    <li><a href="{{path('comments')}}">Comments</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-10 ">
+                <h1>Dashboard</h1>
+                <hr/>
+                <div class="row mt-3 mb-3 ml-1">
+                    <h2>Comments</h2>
+                </div>
+                <table class="table w-100 table-striped border">
+                    {% for comment in comments %}
+                        <tr>
+                            <td><b>{{ comment.id }}</b></td>
+                            <td><b>{{ comment.content | slice(0, 15) }}</b></td>
+                            <td><a href="{{path('view_comment',{'id':comment.id}) }}" class="btn btn-primary">View</a></td>
+                            {% if(comment.upruwed) %}
+                               <td><a href="{{path('hide_comment',{'id':comment.id}) }}" class="btn btn-success">Hide</a></td>
+                          {% else %}
+                                <td><a href="{{path('approve_comment',{'id':comment.id}) }}" class="btn btn-success">Approve</a></td>
+                            {% endif%}
+                            <td><a href="{{path('delete_comment',{'id':comment.id}) }}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
